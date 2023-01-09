@@ -1,20 +1,34 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
-import { useEffect } from "react";
-import { }
-
-useEffect
+import { getTopics} from "./utils/api"
 
 const Nav = () => {
-    return (
+    const [topics, setTopics] = useState([])
 
-    <nav>
-        <Link to="/home">Home</Link>
+    useEffect(() => {
+        getTopics().then(({topics}) => {
+            setTopics(topics)
+        })
+    }, [])
+
+
+    return (
+        <nav className="Nav">
+        {topics.map((topic) => (
+        <Link 
+            to={`/topics/${topic.topic_slug}`}
+            key={topic.id} 
+        > 
+            {topic.topic_slug}
+        </Link>
+        ))}
+        {/* <Link to="/home">Home</Link>
         <span> | </span>
         <Link to="/users">Users </Link>
         <span> | </span>
         <Link to="/articles">Articles</Link>
         <span> | </span>
-        <Link to="/comments">Comments</Link>
+        <Link to="/comments">Comments</Link> */}
     </nav>
     );
 };

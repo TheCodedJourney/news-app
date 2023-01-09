@@ -1,14 +1,14 @@
 import axios from "axios"
-import { generatePath } from "react-router-dom";
+// import { generatePath } from "react-router-dom";
 
 const readersAPI = axios.create({
-    baseURL: "https://"
+    baseURL: "https://news-db-hosting.onrender.com/api"
 });
 
 export const getArticles = (topic) => {
-    return readersAPI.get("/Articles", {params: {topic_slug: topic}}.then((res) => {
+    return readersAPI.get("/articles", {params: {topic_slug: topic}}).then((res) => {
         return res.data
-    }))
+    });
 }
 
 export const getUsers = () => {
@@ -18,7 +18,7 @@ export const getUsers = () => {
 }
 
 export const getTopics = () => {
-    return readersAPI.get("/top[ics").then((res) => {
+    return readersAPI.get("/topics").then((res) => {
         return res.data
     })
 }

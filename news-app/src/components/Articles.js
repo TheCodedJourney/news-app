@@ -1,46 +1,39 @@
-import logo from '../logo.svg';
 import { getArticles } from '../utils/api';
 import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import '../App.css';
 import '../news.css';
-import { useEffect, useState } from 'react';
-
-
-
-
 
 const Articles = () => {
 
   const [isLoading, setIsLoading] = useState(true)
   const [articles, setArticles] = useState([])
-  const {topic_slug} = useState()
+  const {topics_slug} = useParams()
   
   useEffect(() => {
     setIsLoading(true)
-    getArticles(topic_slug).then(({articles}) => {
+    getArticles(topics_slug).then(({ articles }) => {
       setArticles(articles);
       setIsLoading(false)
     })
-  }, []);
+  }, [topics_slug]);
 
   if (isLoading) {
     return <p className='Loading'>Loading...</p>
   }
-    
+
   return (
     <div className="App">
       <header className="logo">
-        <p>
-        THIS IS THE ARTICLES SECTION
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ul>
+        {articles.map((article) => (
+          <li key={article.article_id}>
+            <p>{article.article_title}</p>
+            <p>{article.topics_slug}</p>
+            <p>Comments:{article.comments}</p>
+          </li>
+        ))}
+        </ul>
       </header>
     </div>
   );
