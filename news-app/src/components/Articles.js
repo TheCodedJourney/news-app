@@ -8,15 +8,20 @@ const Articles = () => {
 
   const [isLoading, setIsLoading] = useState(true)
   const [articles, setArticles] = useState([])
-  const {topics_slug} = useParams()
+  const {slug_id} = useParams()
   
+  
+  
+
+  console.log(articles, "articles")
+
   useEffect(() => {
     setIsLoading(true)
-    getArticles(topics_slug).then(({ articles }) => {
+    getArticles(slug_id).then(({ articles }) => {
       setArticles(articles);
       setIsLoading(false)
     })
-  }, [topics_slug]);
+  }, [slug_id]);
 
   if (isLoading) {
     return <p className='Loading'>Loading...</p>
@@ -26,13 +31,15 @@ const Articles = () => {
     <div className="App">
       <header className="logo">
         <ul>
-        {articles.map((article) => (
+        {
+          articles.map((article) => ( 
           <li key={article.article_id}>
-            <p>{article.article_title}</p>
-            <p>{article.topics_slug}</p>
-            <p>Comments:{article.comments}</p>
+            <p>{article.title} </p>
+            <p>by {article.author}</p>
+            <p>Topic: {article.topic}</p>
+            <p>Comments: {article.comment_count}</p>
           </li>
-        ))}
+         ))}
         </ul>
       </header>
     </div>

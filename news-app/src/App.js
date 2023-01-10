@@ -13,12 +13,14 @@ const App = () => {
     <div className="header">
       <header className="header">
       <Header />
+      
       <Nav/>
       </header>
       <Routes>
-      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Home />} />
       <Route path="/users" element={<Users />} />
-      <Route path="/topics" element={<Articles />} />
+      <Route path="/articles" element={<Articles />} />
+      <Route path="/articles/:slug_id" element={<Articles />} />
       <Route path="/comments" element={<Comments />} />
       </Routes>
      

@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
-import { getTopics} from "./utils/api"
+import Articles from "./components/Articles";
+import { getArticles, getTopics} from "./utils/api"
 
 const Nav = () => {
     const [topics, setTopics] = useState([])
+    const [articles, setArticles] = useState([])
+
+    console.log(topics)
 
     useEffect(() => {
         getTopics().then(({topics}) => {
@@ -13,24 +17,54 @@ const Nav = () => {
 
 
     return (
+        <header>
         <nav className="Nav">
         {topics.map((topic) => (
         <Link 
-            to={`/topics/${topic.topic_slug}`}
-            key={topic.id} 
+            to={`/articles/${topic.slug}`}
+            key={topic.slug} 
         > 
-            {topic.topic_slug}
-        </Link>
+            {topic.slug}
+        </Link> 
         ))}
-        {/* <Link to="/home">Home</Link>
-        <span> | </span>
-        <Link to="/users">Users </Link>
-        <span> | </span>
-        <Link to="/articles">Articles</Link>
-        <span> | </span>
-        <Link to="/comments">Comments</Link> */}
+        <Link 
+            to={`/articles`}
+            key={""}
+        > 
+            articles
+        </Link> 
+        <Link 
+            to={`/users`}
+             
+        > 
+            users
+        </Link> 
+        <Link 
+            to={`/comments`}
+             
+        > 
+            comments
+        </Link> 
     </nav>
+    </header>
     );
 };
 
   export default Nav
+
+
+
+
+
+
+
+
+
+
+        {/* <Link to="/home">Home</Link>
+        <span> | </span> 
+        <Link to="/users">Users </Link>
+        <span> | </span>
+        <Link to="/articles" key={""}>Articles</Link>
+        <span> | </span>
+        <Link to="/comments">Comments</Link> */}

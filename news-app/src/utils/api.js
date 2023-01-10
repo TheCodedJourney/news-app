@@ -6,7 +6,7 @@ const readersAPI = axios.create({
 });
 
 export const getArticles = (topic) => {
-    return readersAPI.get("/articles", {params: {topic_slug: topic}}).then((res) => {
+    return readersAPI.get("/articles", {params: {topic: topic}}).then((res) => {
         return res.data
     });
 }
