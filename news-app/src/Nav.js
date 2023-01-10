@@ -5,9 +5,6 @@ import { getArticles, getTopics} from "./utils/api"
 
 const Nav = () => {
     const [topics, setTopics] = useState([])
-    const [articles, setArticles] = useState([])
-
-    console.log(topics)
 
     useEffect(() => {
         getTopics().then(({topics}) => {
@@ -15,13 +12,12 @@ const Nav = () => {
         })
     }, [])
 
-
     return (
         <header>
         <nav className="Nav">
         {topics.map((topic) => (
         <Link 
-            to={`/articles/${topic.slug}`}
+            to={`/articles/?topic=${topic.slug}`}
             key={topic.slug} 
         > 
             {topic.slug}
@@ -45,6 +41,7 @@ const Nav = () => {
         > 
             comments
         </Link> 
+
     </nav>
     </header>
     );
@@ -60,11 +57,3 @@ const Nav = () => {
 
 
 
-
-        {/* <Link to="/home">Home</Link>
-        <span> | </span> 
-        <Link to="/users">Users </Link>
-        <span> | </span>
-        <Link to="/articles" key={""}>Articles</Link>
-        <span> | </span>
-        <Link to="/comments">Comments</Link> */}
