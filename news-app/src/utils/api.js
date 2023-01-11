@@ -17,6 +17,12 @@ export const getArticle = (article_id) => {
     });
 }
 
+export const getArticleComments = (article_id) => {
+    return readersAPI.get(`/articles/${article_id}/comments`).then((res) => {
+        return res.data
+    });
+}
+
 export const getUsers = () => {
     return readersAPI.get("/users").then((res) => {
         return res.data
@@ -28,3 +34,13 @@ export const getTopics = () => {
         return res.data
     })
 }
+
+export const patchArticleByArticleID = (article_id, increment) => {
+
+    return readersAPI.patch(`/articles/${article_id}`, {
+        inc_votes: increment
+    })
+    .then((res) => {
+        console.log(res)
+
+})}

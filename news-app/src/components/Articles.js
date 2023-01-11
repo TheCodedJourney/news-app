@@ -43,6 +43,7 @@ const Articles = () => {
             <p>by {article.author}</p>
             <p>Topic: {article.topic}</p>
             <p>Comments: {article.comment_count}</p>
+            <p>{article.votes} votes </p>
           </li>
          ))}
         </ul>
