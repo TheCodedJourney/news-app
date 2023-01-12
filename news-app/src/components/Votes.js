@@ -1,4 +1,5 @@
 import { useState } from "react";
+import party from "party-js"
 import {patchArticleByArticleID} from "../utils/api"
 
 export default function Vote({votes, articleId}) {
@@ -10,22 +11,22 @@ function incVote() {
     setVoted(false)
     setVoteChange((currVoteChange) => currVoteChange + 1 )
     patchArticleByArticleID(articleId, 1)
-    setVoted(true)
+    .then(() => setVoted(true))
     .catch((err) => {
             setVoteChange((currVoteChange) => currVoteChange - 1)
             console.error(err, "mitch error")
-    })
+    });
 } 
 
 function decVote() {
     setVoted(false)
     setVoteChange((currVoteChange) => currVoteChange - 1 )
-    patchArticleByArticleID(articleId, - 1)
-    setVoted(true)
+    patchArticleByArticleID(articleId, -1)
+    .then(() => setVoted(true))
     .catch((err) => {
             setVoteChange((currVoteChange) => currVoteChange + 1)
             console.error(err, "mitch error")
-    })
+    });
 } 
 
 if (voted) {

@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import {Link} from "react-router-dom"
-import './news.css';
+
 import './App.css';
 
 const Header = () => {

@@ -1,6 +1,5 @@
-import logo from '../logo.svg';
 import '../App.css';
-import '../news.css';
+
 
 const Users = () => {
   return (
