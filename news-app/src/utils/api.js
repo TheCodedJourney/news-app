@@ -48,30 +48,28 @@ export const patchArticleByArticleID = (article_id, increment) => {
     });
 };
 
-    export const onPostComment = (article_id, newComment) => {
-        return readersAPI.post(`/articles/${article_id}/comments`, {username: "jessjelly", body: newComment})
-        .catch((err) => {
-            console.log(err)
-        })
-    }
+export const onPostComment = (article_id, newComment) => {
+    return readersAPI.post(`/articles/${article_id}/comments`, {username: "jessjelly", body: newComment})
+    .catch((err) => {
+        console.log(err)
+    })
+}
 
+export const onDeleteComment = (comment_id) => {
 
+  return readersAPI.delete(`/comments/${comment_id}`)
+  .catch((err) => {
+    console.log(err)
 
+  })
+}
 
-// async function onPostComment(articleId, comment) {
-//     try {
-//         const payload = {
-//             username: comment.username,
-//             body: comment.body
-//         }
-//         const headers = {
-//             'Content-Type': 'application/json'
-//         }
-//         const response = await axios.post(`https://news-db-hosting.onrender.com/api/articles/${articleId}/comments`, payload, {headers});
-//         console.log(response.data);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
+// readersAPI.interceptors.request.use(config => {
+//   console.log('Request was sent:', config);
+//   return config;
+// });
 
-// export {onPostComment}
+// readersAPI.interceptors.response.use(response => {
+//   console.log('Response received:', response);
+//   return response;
+// });

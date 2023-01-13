@@ -1,3 +1,4 @@
+import theNews from '../src/reactiveNewsLogos/Reactive News-logos.jpeg'
 import logo from './logo.svg';
 import {Link} from "react-router-dom"
 
@@ -8,7 +9,7 @@ const Header = () => {
     <div className="header">
       <header>
       <Link to="/">
-    <h1>THE NEWS</h1>
+      <img src={theNews} height="200px" width="auto"  alt="logo"  />
       </Link>
       </header>
     </div>

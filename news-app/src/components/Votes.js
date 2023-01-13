@@ -1,6 +1,7 @@
 import { useState } from "react";
 import party from "party-js"
 import {patchArticleByArticleID} from "../utils/api"
+import { Button, Container, Row, Col } from 'react-bootstrap';
 
 export default function Vote({votes, articleId}) {
     const [voteChange, setVoteChange] = useState(0)
@@ -31,17 +32,28 @@ function decVote() {
 
 if (voted) {
     return <ol>
-     <p className='voted'>Votes {votes + voteChange}</p>
-     <p className='voted'>Thanks for casting your vote! ✅</p> 
+     <p className='voted'>Votes  {votes + voteChange}</p>
+     <p className='voted'>Success! 🎉 </p> 
     </ol>
   }
 
+
 return (
-    <section>
-        <p>Votes {votes + voteChange} </p>
-        <button onClick={incVote}> upVote this article!</button>
-        <button onClick={decVote}> downVote this article!</button>
-    </section>
-)
+    <Container>
+    <Row>
+      <Col>
+        <section>
+          <p>Votes {votes} </p>
+          <Button variant="primary" onClick={incVote}>
+            👍
+          </Button>
+          <Button variant="secondary" onClick={decVote}>
+            👎
+          </Button>
+        </section>
+      </Col>
+    </Row>
+  </Container>
+);
 }
 

@@ -7,7 +7,6 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Container, Row, Col, Form, FormControl, Button} from 'react-bootstrap';
 
-
 const Articles = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [articles, setArticles] = useState([])
@@ -15,7 +14,7 @@ const Articles = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [sortBy, setSortBy] = useState()
   const [sortOrder, setSortOrder] = useState("ascending");
-
+  
   const filter = searchParams.get(`topic`)
 
   useEffect(() => {
@@ -54,7 +53,7 @@ const Articles = () => {
   return (
     <Container>
     <Row className="mb-3">
-      <Col>
+      <Col sm={12} md={6} lg={4}>
         <Form>
           <Form.Group controlId="sortBySelect">
             <Form.Label>Sort by</Form.Label>
@@ -79,11 +78,12 @@ const Articles = () => {
             <Col key={article.article_id} sm={12} md={6} lg={4}>
               <Card>
                 <Card.Header>
-                  <Card.Title>{article.topic[0].toUpperCase() + article.topic.slice(1, article.topic.length )} news </Card.Title>
+                  <Card.Title>{article.topic[0].toUpperCase() + article.topic.slice(1, article.topic.length )}</Card.Title>
                 </Card.Header>
                 <Card.Body>
                   <Card.Title> <Link to={`/articles/${article.article_id}`} key={article_id}>{article.title}.</Link></Card.Title>
-                  <Card.Text className="text-muted">Comments: {article.comment_count}</Card.Text>
+                  <Card.Text className="text-muted">{article.body.substring(0, 50)}<em> ...read more</em>  </Card.Text>
+                  <Card.Text className="text-muted">{article.comment_count} comments</Card.Text>
                   <Card.Text className="text-muted">{article.votes} votes</Card.Text>
                 </Card.Body>
                 <Card.Footer className="text-muted">

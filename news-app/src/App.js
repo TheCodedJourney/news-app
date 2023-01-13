@@ -16,9 +16,9 @@ const App = () => {
     <div className="header">
       <header className="header">
       <Header />
+      </header>
       <Nav/>
       {/* <iframe src="https://open.spotify.com/embed/track/4ZtYo7EHWYsTvqsLL153r4" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe> */}
-      </header>
       <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/users" element={<Users />} />

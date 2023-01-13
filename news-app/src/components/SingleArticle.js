@@ -1,7 +1,5 @@
 
 import Articles from './Articles'
-import { onPostComment } from '../utils/api';
-
 import Vote from './Votes'
 import { getArticle, getArticleComments} from '../utils/api';
 import { Link } from "react-router-dom"
@@ -9,54 +7,23 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Container, Row, Col, Form, FormGroup, FormControl, Button} from 'react-bootstrap';
+import { Card, Container, Row, Col, Form, FormControl, Button} from 'react-bootstrap';
 
 
 
 const SingleArticle = () => {
-    const [isLoading, setIsLoading] = useState(true)
-    const [comments, setComments] = useState([])
-    const {article_id } = useParams()
-    const [newComment, setNewComment] = useState("");
-    const [commentToSubmit, setCommentToSubmit] = useState("")
-    const [article, setArticle] = useState([])
 
-  
-    useEffect(() => {
-      setIsLoading(true)
-      getArticleComments(article_id).then(({ comments }) => {
-        setComments(comments);
-        setIsLoading(false)
-      })
-    }, [article_id, commentToSubmit]);
-  
-    useEffect(() => {
-      setIsLoading(true)
-      getArticle(article_id).then(({ article }) => {
-        setArticle(article);
-        setIsLoading(false)
-      })
-    }, [article_id]);
-  
-  
-    function handleCommentChange(event) {
-      event.preventDefault();
-      setNewComment(event.target.value);
-    }
-  
-    function handleCommentSubmit(event) {
-      event.preventDefault();
-      onPostComment(article_id, newComment)
-        .then(() => {
-          setCommentToSubmit(newComment);
-          setNewComment("");
-          setIsLoading(true);
-          getArticleComments(article_id).then(({ comments }) => {
-            setComments(comments);
-            setIsLoading(false);
-          });
-        });
-    }
+  const [isLoading, setIsLoading] = useState(true)
+  const [article, setArticle] = useState([])
+  const {article_id} = useParams()
+
+  useEffect(() => {
+    setIsLoading(true)
+    getArticle(article_id).then(({ article }) => {
+      setArticle(article);
+      setIsLoading(false)
+    })
+  }, [article_id]);
 
   if (isLoading) {
     return <p className='loading'>Loading...</p>
@@ -81,24 +48,11 @@ const SingleArticle = () => {
       to={`/articles/${article_id}/comments`}
       key={article_id}
   > 
-      view comments 
+      view comments / leave comment 
   </Link> </Card.Text>
       </Card.Footer>
     </Card>
   </Col>
-  <Form onSubmit={handleCommentSubmit}>
-    <FormGroup>
-      <label for="newComment">Leave a comment:</label>
-      <FormControl 
-          as="textarea"
-          name="newComment"
-          id="newComment"
-          value={newComment}
-          onChange={handleCommentChange}
-      />
-    </FormGroup>
-    <Button type="submit">Post Comment</Button>
-  </Form>
 </Row>
 
 
